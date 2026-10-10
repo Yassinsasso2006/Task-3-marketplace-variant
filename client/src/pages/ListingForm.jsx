@@ -15,13 +15,14 @@ export default function ListingForm() {
     async function loadListing() {
       try {
         const res = await api.get(`/listings/${id}`)
+        const listing = res.data.listing
         setForm({
-          title: res.data.title,
-          price: res.data.price,
-          category: res.data.category,
-          condition: res.data.condition,
-          description: res.data.description,
-          status: res.data.status,
+          title: listing.title,
+          price: listing.price,
+          category: listing.category,
+          condition: listing.condition,
+          description: listing.description || '',
+          status: listing.status,
         })
       } catch (err) {
         setError(err.response?.data?.message || 'Failed to load listing')
